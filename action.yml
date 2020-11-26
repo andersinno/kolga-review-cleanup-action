@@ -1,0 +1,16 @@
+name: 'Kolga Stop Review'
+description: 'This action is used to execute Kolga stop review'
+inputs:
+  namespace:
+    description: 'Namespace to delete'
+    required: true
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/andersinno/kolga:v3'
+  entrypoint: /app/devops
+  args:
+    - review_cleanup
+    - '--track'
+    - 'review'
+  env:
+    K8S_NAMESPACE: ${{ inputs.namespace }}
